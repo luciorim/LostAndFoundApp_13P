@@ -1,10 +1,10 @@
 # Lost and Found
 
 ## Introduction  
-This project is a web-based lost and found item tracking system for users to report, browse, and manage lost or found objects in their community or organization.
+This is an online lost and found system that enables users to report, search, and manage objects lost or found within their organization or community.
 
 ## Problem Statement  
-Losing personal items in public places is common, and there is no centralized, structured system for reporting or tracking such items. This project addresses this gap by providing a reliable platform to connect people who lost items with those who found them.
+Losing personal items in public places is not rare, and there lacks a structured, centralized mechanism for reporting or searching for such items. This project bridges this gap by developing a reliable platform to connect people who lost something with people who found something.
 
 ## Objectives  
 - To provide an easy-to-use platform for posting lost and found items.  
@@ -64,7 +64,7 @@ No tests have been implemented
 ## Known Issues
 
 1. No tests
-2. Better frontend could be written 
+2. Better frontend could be written
 
 ## References
 
