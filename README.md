@@ -70,6 +70,10 @@ Owner or admin can change status of item and delete it
 
 <img width="1375" alt="image" src="https://github.com/user-attachments/assets/b9e88e30-8002-46f6-a1e9-f044cb0d69ad" />
 
+
+<img width="1433" alt="image" src="https://github.com/user-attachments/assets/c28cdd2b-7e60-4b64-922b-1b4c8abacd14" />
+
+
 ## Testing
 
 No tests have been implemented. Instead you can test full functionality manually via UI. 
