@@ -41,6 +41,12 @@ make up
 
 ## Usage Guide
 
+```
+  on localhost/api/docs/ you can find rest api endpoins, but is not mentadory because the app uses template rendering
+```
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/e1991e20-19b3-4651-b805-9a8ba01b18aa" />
+
+
 <img width="1328" alt="image" src="https://github.com/user-attachments/assets/5ba8f6e7-5a30-4a77-a9e9-ada3f6776ce0" />
 
 
@@ -54,17 +60,23 @@ make up
 
 
 Owner or admin can change status of item and delete it
+
+
 <img width="318" alt="image" src="https://github.com/user-attachments/assets/436104aa-958f-4248-9251-6a069ff76f21" />
 
 
 ## Testing
 
-No tests have been implemented 
+No tests have been implemented. Instead you can test full functionality manually via UI. 
+Admin user already created: 
+login: admin
+pass: admin
 
 ## Known Issues
 
 1. No tests
 2. Better frontend could be written
+3. Didn't complete rest-api part to migrate project to modern architecture 
 
 ## References
 
