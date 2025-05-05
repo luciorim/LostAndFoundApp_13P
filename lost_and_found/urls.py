@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from items.views import (
     ItemListView, ItemDetailView, ItemCreateView, CommentCreateView,
-    RegisterView, ProfileView, ChangeStatusView
+    RegisterView, ProfileView, ChangeStatusView, ItemDeleteView
 )
 
 urlpatterns = [
@@ -21,6 +21,7 @@ urlpatterns = [
     path('profile/', ProfileView.as_view(), name='profile'),
     path('profile/<int:user_id>/', ProfileView.as_view(), name='profile'),
     path('change_status/<int:pk>/', ChangeStatusView.as_view(), name='change_status'),
+    path('item/<int:pk>/delete/', ItemDeleteView.as_view(), name='item_delete'),
     #rest
     path('api/', include('items.urls')),
     #silk

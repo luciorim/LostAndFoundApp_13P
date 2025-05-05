@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import ListView, DetailView, CreateView, FormView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, DetailView, CreateView, FormView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
@@ -125,3 +125,12 @@ class ChangeStatusView(LoginRequiredMixin, DetailView):
                 item.save()
 
         return redirect("item_detail", item.id)
+
+class ItemDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Item
+    template_name = 'item_confirm_delete.html'
+    success_url = reverse_lazy('item_list')
+
+    def test_func(self):
+        item = self.get_object()
+        return self.request.user == item.user or self.request.user.is_staff

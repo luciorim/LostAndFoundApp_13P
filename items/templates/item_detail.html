@@ -6,15 +6,19 @@
     <div class="card">
         <div class="card-body">
             <h2 class="card-title">{{ item.title }}</h2>
+
             {% if item.image %}
-                <img src="{{ item.image.url }}" class="img-fluid rounded my-2" alt="Фото" style="max-width: 60%; height: auto; display: block; margin: 0 auto;">
+                <img src="{{ item.image.url }}" class="img-fluid rounded my-2" alt="Фото"
+                     style="max-width: 60%; height: auto; display: block; margin: 0 auto;">
             {% endif %}
 
-            <p class="text-muted">Posted by:
+            <p class="text-muted">
+                Posted by:
                 <a href="{% url 'profile' item.user.id %}" class="btn btn-outline-secondary btn-sm">
                     {{ item.user.username }}
                 </a>
             </p>
+
             <p class="text-muted">Posted on: {{ item.created_at|date:"d.m.Y H:i" }}</p>
             <p>{{ item.description }}</p>
 
@@ -39,13 +43,20 @@
                 </form>
             {% endif %}
 
-            <h5>Contacts:</h5>
+            {% if request.user == item.user or request.user.is_staff %}
+                <form method="get" action="{% url 'item_delete' item.id %}" class="mt-3">
+                    <button type="submit" class="btn btn-danger">Delete Item</button>
+                </form>
+            {% endif %}
+
+            <h5 class="mt-4">Contacts:</h5>
             <ul>
                 {% if item.user.email %}
                     <li>Email: <a href="mailto:{{ item.user.email }}">{{ item.user.email }}</a></li>
                 {% endif %}
                 {% if item.contact_telegram %}
-                    <li>Telegram: <a href="https://t.me/{{ item.contact_telegram }}" target="_blank">@{{ item.contact_telegram }}</a></li>
+                    <li>Telegram: <a href="https://t.me/{{ item.contact_telegram }}" target="_blank">
+                        @{{ item.contact_telegram }}</a></li>
                 {% endif %}
             </ul>
         </div>
