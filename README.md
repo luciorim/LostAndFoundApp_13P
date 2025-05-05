@@ -65,6 +65,11 @@ Owner or admin can change status of item and delete it
 <img width="318" alt="image" src="https://github.com/user-attachments/assets/436104aa-958f-4248-9251-6a069ff76f21" />
 
 
+<img width="1419" alt="image" src="https://github.com/user-attachments/assets/fdebf7ad-c01d-48f7-979c-3a8f5d1652d4" />
+
+
+<img width="1375" alt="image" src="https://github.com/user-attachments/assets/b9e88e30-8002-46f6-a1e9-f044cb0d69ad" />
+
 ## Testing
 
 No tests have been implemented. Instead you can test full functionality manually via UI. 
