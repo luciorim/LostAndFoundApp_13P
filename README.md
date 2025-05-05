@@ -33,7 +33,7 @@ git clone https://github.com/luciorim/LostAndFoundApp_13P.git
 cd LostAndFoundApp_13P
 ```
 
-3. run server (Check that port :8000 is free)
+3. run server (Check that ports :8000 :5432 :9000 :9001 is free)
 ```
 make up
 ```
@@ -50,10 +50,12 @@ make up
 <img width="1269" alt="image" src="https://github.com/user-attachments/assets/e2ffed23-8e71-4ac8-b634-258dd0641a24" />
 
 
-<img width="1297" alt="image" src="https://github.com/user-attachments/assets/daf88d53-8b69-4f21-b0fd-407e4792baa9" />
+<img width="1295" alt="image" src="https://github.com/user-attachments/assets/19a00758-f5cd-4a9d-bd88-314299ff7644" />
 
-Owner or admin can change status of item
-<img width="713" alt="image" src="https://github.com/user-attachments/assets/0704f0ba-ed98-454b-b807-4da46d919bcd" />
+
+Owner or admin can change status of item and delete it
+<img width="318" alt="image" src="https://github.com/user-attachments/assets/436104aa-958f-4248-9251-6a069ff76f21" />
+
 
 ## Testing
 
@@ -62,7 +64,7 @@ No tests have been implemented
 ## Known Issues
 
 1. No tests
-2. No searching feauture
+2. Better frontend could be written 
 
 ## References
 
