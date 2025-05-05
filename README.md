@@ -27,29 +27,17 @@ Losing personal items in public places is common, and there is no centralized, s
 ```
 git clone https://github.com/luciorim/LostAndFoundApp_13P.git
 ```
-3. create venv
 
-  for Windows 
-```
-python -m venv venv
-venv\Scripts\activate
-```
-  for MacOS/Linux
-```
-python3 -m venv venv
-source venv/bin/activate
-```
-
-3. go to project directory
+2. go to project directory
 ```
 cd LostAndFoundApp_13P
 ```
 
-4. run server (Check that port :8000 is free)
+3. run server (Check that port :8000 is free)
 ```
 make up
 ```
-5. open localhost in your browser
+4. open localhost in your browser
 
 ## Usage Guide
 
