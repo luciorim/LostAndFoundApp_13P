@@ -4,54 +4,69 @@
 <div class="container">
     <h2 class="mb-3 text-center">All Records</h2>
 
+    <form method="get" class="mb-4 d-flex align-items-center gap-2">
+    <input type="text" name="q" value="{{ query }}" class="form-control" placeholder="Search by title or description">
+
+    <select name="status" class="form-select" style="max-width: 200px;">
+        <option value="both" {% if selected_status == "both" %}selected{% endif %}>Both</option>
+        <option value="lost" {% if selected_status == "lost" %}selected{% endif %}>Lost</option>
+        <option value="found" {% if selected_status == "found" %}selected{% endif %}>Found</option>
+    </select>
+
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+
     {% for item in items %}
-    <div class="item-card">
+    <div class="item-card mb-3 p-3 border rounded d-flex">
         {% if item.image %}
-            <img src="{{ item.image.url }}" alt="Фото" class="img-fluid" style="width: 200px; height: auto; object-fit: cover; margin-right: 15px;">
+        <img src="{{ item.image.url }}" alt="Photo" class="img-fluid"
+             style="width: 200px; height: auto; object-fit: cover; margin-right: 15px;">
         {% endif %}
         <div>
             <h5 class="fw-bold">
                 {{ item.title }}
                 <span class="badge
-                    {% if item.status == 'lost' %}bg-danger
-                    {% elif item.status == 'found' %}bg-success
+                    {% if item.status|upper == 'LOST' %}bg-danger
+                    {% elif item.status|upper == 'FOUND' %}bg-success
                     {% else %}bg-secondary{% endif %}">
                     {{ item.get_status_display }}
                 </span>
             </h5>
-            <h7 class="text-muted mb-1">{{ item.description|truncatechars:100 }}</h7>
+            <p class="text-muted mb-1">{{ item.description|truncatechars:100 }}</p>
             <p class="text-muted mb-1">Posted by: {{ item.user.username }}</p>
             <p class="text-muted mb-1">Posted on: {{ item.created_at|date:"d.m.Y H:i" }}</p>
             <a href="{% url 'item_detail' item.id %}" class="btn btn-primary btn-sm">Details</a>
         </div>
     </div>
+    {% empty %}
+    <p>No items found.</p>
     {% endfor %}
 
-    {% if items.paginator.num_pages > 1 %}
-    <nav aria-label="Page navigation">
+    {% if is_paginated %}
+        <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center mt-3">
-            {% if items.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page=1">First</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ items.previous_page_number }}">Previous</a>
-                </li>
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?q={{ query }}&status={{ selected_status }}&page=1">First</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?q={{ query }}&status={{ selected_status }}&page={{ page_obj.previous_page_number }}">Previous</a>
+            </li>
             {% endif %}
 
             <li class="page-item active">
-                <span class="page-link">{{ items.number }} / {{ items.paginator.num_pages }}</span>
+                <span class="page-link">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
             </li>
 
-            {% if items.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ items.next_page_number }}">Next</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ items.paginator.num_pages }}">Last</a>
-                </li>
-            {% endif %}
-        </ul>
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?q={{ query }}&status={{ selected_status }}&page={{ page_obj.next_page_number }}">Next</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?q={{ query }}&status={{ selected_status }}&page={{ page_obj.paginator.num_pages }}">Last</a>
+            </li>
+        {% endif %}
+    </ul>
     </nav>
     {% endif %}
 </div>

@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from .models import Item, Comment
 from .forms import ItemForm, CommentForm, RegisterForm
+from django.db.models import Q
 
 
 class ItemListView(ListView):
@@ -15,7 +16,26 @@ class ItemListView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Item.objects.all().order_by('-created_at')
+        queryset = Item.objects.all().order_by('-created_at')
+        query = self.request.GET.get('q')
+        status = self.request.GET.get('status')
+
+        if query:
+            queryset = queryset.filter(Q(title__icontains=query) | Q(description__icontains=query))
+
+        if status == 'lost':
+            queryset = queryset.filter(status='LOST')
+        elif status == 'found':
+            queryset = queryset.filter(status='FOUND')
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['query'] = self.request.GET.get('q', '')
+        context['selected_status'] = self.request.GET.get('status', 'both')
+        return context
+
 
 
 class ItemDetailView(DetailView):
@@ -28,7 +48,7 @@ class ItemDetailView(DetailView):
         text = request.POST.get("text")
         if text:
             Comment.objects.create(item=item, text=text)
-        return redirect('item_detail', pk=item.id)
+        return redirect('item_detail', item.id)
 
 
 class ItemCreateView(LoginRequiredMixin, CreateView):
@@ -99,9 +119,9 @@ class ChangeStatusView(LoginRequiredMixin, DetailView):
         item = self.get_object()
 
         if request.user.is_staff or request.user == item.user:
-            new_status = request.POST.get("status")
-            if new_status in ["lost", "found", "returned"]:
+            new_status = request.POST.get("status", "LOST").upper()
+            if new_status in ["LOST", "FOUND"]:
                 item.status = new_status
                 item.save()
 
-        return redirect("item_detail", item_id=item.id)
+        return redirect("item_detail", item.id)
