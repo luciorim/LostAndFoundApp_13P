@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <h2 class="d-flex align-items-center">
+            {% if is_own_profile %}
+                Your Profile
+            {% else %}
+                <span class="profile-username">{{ user.username }}</span>
+                {% if user.is_staff %}
+                    <div class="admin-box ms-2">Admin</div>
+                {% endif %}
+                's Profile
+            {% endif %}
+        </h2>
+
+        <p>Email: {{ user.email }}</p>
+        <p>Registered: {{ user.date_joined }}</p>
+
+        <h3>Found Items</h3>
+        {% for item in user_items %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <p class="card-text">{{ item.description }}</p>
+                    <a href="{% url 'item_detail' item.id %}" class="btn btn-primary">View Item</a>
+                </div>
+            </div>
+        {% empty %}
+            <p>No items found.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
