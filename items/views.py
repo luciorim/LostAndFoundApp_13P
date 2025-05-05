@@ -28,7 +28,7 @@ class ItemDetailView(DetailView):
         text = request.POST.get("text")
         if text:
             Comment.objects.create(item=item, text=text)
-        return redirect('item_detail', item_id=item.id)
+        return redirect('item_detail', pk=item.id)
 
 
 class ItemCreateView(LoginRequiredMixin, CreateView):
@@ -55,7 +55,7 @@ class CommentCreateView(FormView):
         if self.request.user.is_authenticated:
             comment.user = self.request.user
         comment.save()
-        return redirect('item_detail', item_id=item.id)
+        return redirect('item_detail', item.id)
 
 
 class RegisterView(FormView):
